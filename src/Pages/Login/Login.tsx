@@ -3,12 +3,11 @@ import React, { useState } from "react";
 import "./Login.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useMutation } from "react-query";
 
 import "react-phone-input-2/lib/style.css";
 
 import {
-  // PhoneInput,
   FormContainer,
   Container,
   Image,
@@ -25,13 +24,9 @@ import {
   ConnectionContainer,
   Line,
   IconImage,
-  // PasswordInput,
 } from "./Login.style";
-import { FormControl, IconButton, OutlinedInput } from "@mui/material";
+import { FormControl, IconButton } from "@mui/material";
 import { VisibilityOff, Visibility } from "@material-ui/icons";
-import ReactFlagsSelect from "react-flags-select";
-import PhoneInput from "react-phone-input-2";
-import { Grid } from "@material-ui/core";
 export const gitHeader = () => {
   const token =
     "Token " +
@@ -53,31 +48,15 @@ const Login = () => {
     therd: "",
   });
 
-  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = React.useState("");
 
-  const handleChange = (newPhone: string) => {
-    setPhone(newPhone);
-  };
+  const { data, isLoading, mutate } = useMutation({
+    mutationFn: (val: { password: string; phone_number: string }) =>
+      axios.post("https://torbet.perla-tech.com/log_in", val),
+  });
 
-  const { data, isLoading } = useQuery("fetch", () =>
-    axios.post("http://127.0.0.1:8000/api-token-auth/", {
-      username: userName,
-      password: password,
-    })
-  );
   const navigate = useNavigate();
-  const submit = async () => {
-    await axios
-      .post("http://127.0.0.1:8000/api-token-auth/", {
-        username: userName,
-        password: password,
-      })
-      .then((res) => {
-        localStorage.setItem("token", JSON.stringify(res.data.token));
-      });
-  };
+
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -149,6 +128,10 @@ const Login = () => {
                   variant="standard"
                 >
                   <TextInput
+                    value={password}
+                    onChange={(val) => {
+                      setPassword(val.target.value);
+                    }}
                     id="outlined-adornment-password"
                     type={!showPassword ? "password" : "text"}
                     endAdornment={
@@ -166,12 +149,23 @@ const Login = () => {
                 </FormControl>
               </InputsContainer>
               <LinksContainer>
-                <LogButton>
+                <LogButton
+                  onClick={() => {
+                    mutate({
+                      password: password,
+                      phone_number:
+                        phoneNumber.code +
+                        phoneNumber.first +
+                        phoneNumber.secound +
+                        phoneNumber.therd,
+                    });
+                  }}
+                >
                   <span>Login</span>
                 </LogButton>
                 <LinksRow>
                   <span>Forgot Password?</span>
-                  <a href="">Sign Up →</a>
+                  <a href="#SignUp">Sign Up →</a>
                 </LinksRow>
               </LinksContainer>
             </FormContainer>
