@@ -18,9 +18,12 @@ const Container = styled(Box)<{ active: boolean }>`
 `;
 const ButtomLine = styled.div`
   box-sizing: border-box;
-  width: 82px;
+  width: 100%;
   height: 2px;
   background: rgba(237, 157, 153, 0.5);
   border-radius: 5px;
 `;
-export { Container, ButtomLine };
+const SvgStyle = styled.path`
+  color: linear-gradient(225deg, #ed9d99 0%, #d14dcd 100%); ;
+`;
+export { Container, ButtomLine, SvgStyle };

@@ -6,9 +6,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap");
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: "Montserrat", sans-serif, source-code-pro, Menlo, Monaco,
+    Consolas, "Courier New", monospace;
+}
+.main-stop {
+  stop-color: #d14dcd;
+}
+.alt-stop {
+  stop-color: #ed9d99;
+}
+.black {
+  fill: #bdbdbd;
+}
+.gradient-bg {
+  fill: url(#gradient) #fff;
 }
