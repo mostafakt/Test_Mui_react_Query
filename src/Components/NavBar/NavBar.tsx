@@ -1,6 +1,7 @@
 import { AppBar } from "@material-ui/core";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MainButton from "../MainButton";
 import {
   Container,
@@ -31,6 +32,7 @@ const NavBar = () => {
     partners: false,
     explore: false,
   });
+  const navigate = useNavigate();
   return (
     <>
       <AppBar position="static">
@@ -137,7 +139,10 @@ const NavBar = () => {
               <span>Contact Us</span>
             </Contuct>
             <Box sx={{ width: "188px", mr: "12px" }}>
-              <MainButton startIcon={<LoginButtonIcon />}>
+              <MainButton
+                onClick={() => navigate("/login")}
+                startIcon={<LoginButtonIcon />}
+              >
                 <span>Login/Sign Up</span>
               </MainButton>
             </Box>

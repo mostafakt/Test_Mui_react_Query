@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Container = styled(Box)`
   background-color: #f6f9fd;
+  border-bottom: 1px solid #fb9a0b;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

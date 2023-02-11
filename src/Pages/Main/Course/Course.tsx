@@ -8,8 +8,10 @@ import {
   CourseImage,
   CourseInfo,
   CourseTile,
+  CourseType,
   CurPrice,
   IconConttainer,
+  ImageContainer,
   MainInfo,
   MainPrice,
   MidLine,
@@ -70,6 +72,9 @@ export interface ICourse {
   hours: number;
   attendance: string;
   peopleWishNum: string;
+  onLine: boolean;
+  imageUrl?: string;
+  onClick?: () => void;
 }
 const Course = ({
   speakerName,
@@ -84,14 +89,27 @@ const Course = ({
   hours,
   attendance,
   peopleWishNum,
+  onLine,
+  imageUrl,
+  onClick,
 }: ICourse) => {
   let stars = [0, 0, 0, 0, 0];
   return (
     <>
-      <Container>
-        <CourseImage
-          src={process.env.PUBLIC_URL + "/assets/images/Course Image.svg"}
-        />
+      <Container onClick={onClick}>
+        <ImageContainer>
+          <CourseImage
+            src={
+              imageUrl
+                ? imageUrl
+                : process.env.PUBLIC_URL + "/assets/images/Course Image.svg"
+            }
+          />
+          <CourseType onLine={onLine}>
+            {onLine ? <span>online</span> : <span>Offline</span>}
+          </CourseType>
+        </ImageContainer>
+
         <CourseDescription>
           <Box
             sx={{
@@ -104,23 +122,21 @@ const Course = ({
             <img
               src={process.env.PUBLIC_URL + "/assets/Icons/PersonLogo.svg"}
             />
-            <SpeakerName> Avinach Jain</SpeakerName>
+            <SpeakerName> {speakerName}</SpeakerName>
           </Box>
-          <Title>Learning Python for Data Analysis and Visualization</Title>
-          <SubTitle>
-            Vulputate commodo urna quam sagittis mattis aliquam.
-          </SubTitle>
+          <Title>{title}</Title>
+          <SubTitle>{subTitle}</SubTitle>
           <RowRate>
-            {stars.map((t, i) => starIcon(i < 3 ? true : false))}
+            {stars.map((t, i) => starIcon(i < rateFromFive ? true : false))}
 
-            <RateNumber>(18,465)</RateNumber>
+            <RateNumber>({ratesNumber})</RateNumber>
           </RowRate>
         </CourseDescription>
         <MidLine></MidLine>
         <CourseInfo>
           <MainInfo>
             <Price>
-              <CurPrice>50,000 SYP </CurPrice>
+              <CurPrice>{currentPrice} SYP </CurPrice>
               <Box
                 sx={{
                   display: "flex",
@@ -129,9 +145,9 @@ const Course = ({
                   alignItems: "center",
                 }}
               >
-                <MainPrice> 100,000 SYP</MainPrice>
+                <MainPrice> {mainPrice} SYP</MainPrice>
                 <OfferPers>
-                  <span>50% OFF</span>
+                  <span>{offerPercentage}% OFF</span>
                 </OfferPers>
               </Box>
             </Price>
@@ -145,7 +161,7 @@ const Course = ({
                 <img
                   src={process.env.PUBLIC_URL + "/assets/Icons/Time Icon.svg"}
                 />
-                <span>3d</span>
+                <span>{days}d</span>
               </IconConttainer>
               <IconConttainer>
                 <img
@@ -153,7 +169,7 @@ const Course = ({
                     process.env.PUBLIC_URL + "/assets/Icons/Hourglass Icon.svg"
                   }
                 />
-                <span>30h</span>
+                <span>{hours}h</span>
               </IconConttainer>
               <IconConttainer>
                 <img
@@ -161,7 +177,7 @@ const Course = ({
                     process.env.PUBLIC_URL + "/assets/Icons/Student Icon.svg"
                   }
                 />
-                <span>35/50</span>
+                <span>{attendance}</span>
               </IconConttainer>
             </AttendanceInfo>
           </MainInfo>
@@ -170,7 +186,7 @@ const Course = ({
               <img
                 src={process.env.PUBLIC_URL + "/assets/Icons/Heart Icon.svg"}
               />
-              <span>50 People wish this item.</span>
+              <span>{peopleWishNum} People wish this item.</span>
             </PeopleWish>
           </CourseTile>
         </CourseInfo>

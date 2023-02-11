@@ -2,6 +2,7 @@ import { Box } from "@mui/material/";
 import styled from "styled-components";
 
 const Container = styled(Box)`
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   padding: 16px;
@@ -18,6 +19,13 @@ const CourseImage = styled.img`
   height: 248px;
   border-radius: 10px;
   background-color: red;
+`;
+const ImageContainer = styled(Box)`
+  z-index: 0;
+  overflow: hidden;
+  position: relative;
+  width: 268px;
+  height: 248px;
 `;
 const CourseDescription = styled(Box)`
   margin-top: 24px;
@@ -154,7 +162,32 @@ const CourseTile = styled(Box)`
   flex-direction: row;
   justify-content: space-between;
 `;
+const CourseType = styled(Box)<{ onLine: boolean }>`
+  padding-top: 6px;
+  z-index: 1;
+  position: absolute;
+  width: 120px;
+  height: 32px;
+  left: 176.63px;
+  top: 16px;
+  span {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #ffffff;
+    transform: rotate(45deg);
+  }
+  background: ${(prop) =>
+    prop.onLine
+      ? `linear-gradient(269.05deg, #56CCF2 -0.02%, #3B7EC5 100.9%);`
+      : `linear-gradient(269.05deg, #f2c94c -0.02%, #fb9a0b 100.9%)`};
+  transform: rotate(45deg);
+`;
 export {
+  ImageContainer,
+  CourseType,
   CourseTile,
   PeopleWish,
   IconConttainer,

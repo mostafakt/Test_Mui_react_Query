@@ -24,6 +24,7 @@ import {
   ConnectionContainer,
   Line,
   IconImage,
+  ArrowContainer,
 } from "./Login.style";
 import { FormControl, IconButton } from "@mui/material";
 import { VisibilityOff, Visibility } from "@material-ui/icons";
@@ -66,12 +67,18 @@ const Login = () => {
   ) => {
     event.preventDefault();
   };
-
   return (
     <>
       <Container>
+        <ArrowContainer>
+          <img
+            onClick={() => navigate("/")}
+            src={process.env.PUBLIC_URL + "/assets/Icons/Arrow-Left Icon.svg"}
+          />
+        </ArrowContainer>
         <LeftSide>
           <p>Login</p>
+
           <BodyContainer display={"flex"} flexDirection={"column"} gap={"24px"}>
             <FormContainer>
               <InputsContainer>

@@ -24,6 +24,7 @@ const Container = styled.div`
   gap: 244px;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-start;
 `;
 const Image = styled.img`
   width: 472px;
@@ -178,7 +179,13 @@ const IconImage = styled.img`
   width: 24px;
   height: 24px;
 `;
+const ArrowContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+`;
 export {
+  ArrowContainer,
   IconImage,
   Line,
   ConnectionContainer,

@@ -1,9 +1,12 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Footer from "../../Components/Footer";
 import NavBar from "../../Components/NavBar";
+import SideList from "../../Components/SideList";
 import { coursConfig } from "./config";
 import Course from "./Course";
 import {
+  BacKground,
   Courses,
   CoursesContainer,
   CoursesHeader,
@@ -12,6 +15,7 @@ import {
   HeaderCircle,
   HeaderLine,
   HeaderText,
+  Wrapper,
 } from "./Main.Style";
 
 function RightArrow(active: boolean) {
@@ -65,135 +69,151 @@ const Main = () => {
         behavior: "smooth",
       });
   };
+  const navigate = useNavigate();
   return (
     <>
+      <SideList />
       <NavBar />
-      <CoursesContainer sx={{ mr: "96px", ml: "96px", mt: "72px" }}>
-        <CoursesHeader>
-          <CoursesHeaderContent>
-            <HeaderText>
-              <span>Top Trending Courses</span>
-              <Link to={"#More"}>More →</Link>
-            </HeaderText>
-            <HeaderButton>
-              <div
-                onClick={() => handleScrollLeft(ref)}
-                style={{ cursor: "pointer" }}
-              >
-                {LeftArrow(false)}
-              </div>
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => handleScrollRight(ref)}
-              >
-                {RightArrow(true)}
-              </div>
-            </HeaderButton>
-          </CoursesHeaderContent>
-          <HeaderLine></HeaderLine>
-          <HeaderCircle></HeaderCircle>
-        </CoursesHeader>
-        <Courses ref={ref}>
-          {coursConfig.map(
-            (
-              {
-                title,
-                attendance,
-                currentPrice,
-                days,
-                hours,
-                mainPrice,
-                offerPercentage,
-                peopleWishNum,
-                rateFromFive,
-                ratesNumber,
-                speakerName,
-                subTitle,
-              },
-              i
-            ) => (
-              <Course
-                key={i}
-                title={title}
-                attendance={attendance}
-                currentPrice={currentPrice}
-                days={days}
-                hours={hours}
-                mainPrice={mainPrice}
-                offerPercentage={offerPercentage}
-                peopleWishNum={peopleWishNum}
-                rateFromFive={rateFromFive}
-                ratesNumber={ratesNumber}
-                speakerName={speakerName}
-                subTitle={subTitle}
-              />
-            )
-          )}
-        </Courses>
-      </CoursesContainer>
-      <CoursesContainer sx={{ mr: "96px", ml: "96px", mt: "72px" }}>
-        <CoursesHeader>
-          <CoursesHeaderContent>
-            <HeaderText>
-              <span>Recommended from Us</span>
-              <Link to={"#More"}>More →</Link>
-            </HeaderText>
-            <HeaderButton>
-              <div
-                onClick={() => handleScrollLeft(ref2)}
-                style={{ cursor: "pointer" }}
-              >
-                {LeftArrow(false)}
-              </div>
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => handleScrollRight(ref2)}
-              >
-                {RightArrow(true)}
-              </div>
-            </HeaderButton>
-          </CoursesHeaderContent>
-          <HeaderLine></HeaderLine>
-          <HeaderCircle></HeaderCircle>
-        </CoursesHeader>
-        <Courses ref={ref2}>
-          {coursConfig.map(
-            (
-              {
-                title,
-                attendance,
-                currentPrice,
-                days,
-                hours,
-                mainPrice,
-                offerPercentage,
-                peopleWishNum,
-                rateFromFive,
-                ratesNumber,
-                speakerName,
-                subTitle,
-              },
-              i
-            ) => (
-              <Course
-                key={i}
-                title={title}
-                attendance={attendance}
-                currentPrice={currentPrice}
-                days={days}
-                hours={hours}
-                mainPrice={mainPrice}
-                offerPercentage={offerPercentage}
-                peopleWishNum={peopleWishNum}
-                rateFromFive={rateFromFive}
-                ratesNumber={ratesNumber}
-                speakerName={speakerName}
-                subTitle={subTitle}
-              />
-            )
-          )}
-        </Courses>
-      </CoursesContainer>
+      <BacKground></BacKground>
+      <Wrapper>
+        <CoursesContainer sx={{ mr: "96px", ml: "96px" }}>
+          <CoursesHeader>
+            <CoursesHeaderContent>
+              <HeaderText>
+                <span>Top Trending Courses</span>
+                <Link to={"#More"}>More →</Link>
+              </HeaderText>
+              <HeaderButton>
+                <div
+                  onClick={() => handleScrollLeft(ref)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {LeftArrow(false)}
+                </div>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleScrollRight(ref)}
+                >
+                  {RightArrow(true)}
+                </div>
+              </HeaderButton>
+            </CoursesHeaderContent>
+            <HeaderLine></HeaderLine>
+            <HeaderCircle></HeaderCircle>
+          </CoursesHeader>
+          <Courses ref={ref}>
+            {coursConfig.map(
+              (
+                {
+                  title,
+                  attendance,
+                  currentPrice,
+                  days,
+                  hours,
+                  mainPrice,
+                  offerPercentage,
+                  peopleWishNum,
+                  rateFromFive,
+                  ratesNumber,
+                  speakerName,
+                  subTitle,
+                  onLine,
+                  imageUrl,
+                },
+                i
+              ) => (
+                <Course
+                  key={i}
+                  onClick={() => navigate("/course")}
+                  imageUrl={imageUrl}
+                  onLine={onLine}
+                  title={title}
+                  attendance={attendance}
+                  currentPrice={currentPrice}
+                  days={days}
+                  hours={hours}
+                  mainPrice={mainPrice}
+                  offerPercentage={offerPercentage}
+                  peopleWishNum={peopleWishNum}
+                  rateFromFive={rateFromFive}
+                  ratesNumber={ratesNumber}
+                  speakerName={speakerName}
+                  subTitle={subTitle}
+                />
+              )
+            )}
+          </Courses>
+        </CoursesContainer>
+        <CoursesContainer sx={{ mr: "96px", ml: "96px" }}>
+          <CoursesHeader>
+            <CoursesHeaderContent>
+              <HeaderText>
+                <span>Recommended from Us</span>
+                <Link to={"#More"}>More →</Link>
+              </HeaderText>
+              <HeaderButton>
+                <div
+                  onClick={() => handleScrollLeft(ref2)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {LeftArrow(false)}
+                </div>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleScrollRight(ref2)}
+                >
+                  {RightArrow(true)}
+                </div>
+              </HeaderButton>
+            </CoursesHeaderContent>
+            <HeaderLine></HeaderLine>
+            <HeaderCircle></HeaderCircle>
+          </CoursesHeader>
+          <Courses ref={ref2}>
+            {coursConfig.map(
+              (
+                {
+                  title,
+                  attendance,
+                  currentPrice,
+                  days,
+                  hours,
+                  mainPrice,
+                  offerPercentage,
+                  peopleWishNum,
+                  rateFromFive,
+                  ratesNumber,
+                  speakerName,
+                  subTitle,
+                  onLine,
+                  imageUrl,
+                },
+                i
+              ) => (
+                <Course
+                  key={i}
+                  imageUrl={imageUrl}
+                  onLine={onLine}
+                  title={title}
+                  attendance={attendance}
+                  currentPrice={currentPrice}
+                  days={days}
+                  hours={hours}
+                  mainPrice={mainPrice}
+                  offerPercentage={offerPercentage}
+                  peopleWishNum={peopleWishNum}
+                  rateFromFive={rateFromFive}
+                  ratesNumber={ratesNumber}
+                  speakerName={speakerName}
+                  subTitle={subTitle}
+                />
+              )
+            )}
+          </Courses>
+        </CoursesContainer>
+      </Wrapper>
+
+      <Footer />
     </>
   );
 };
