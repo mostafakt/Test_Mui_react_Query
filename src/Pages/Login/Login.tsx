@@ -5,8 +5,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
-import "react-phone-input-2/lib/style.css";
-
 import {
   FormContainer,
   Container,
